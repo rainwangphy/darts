@@ -9,6 +9,7 @@ from config import SearchConfig
 from tools import utils
 from models.search_cnn import SearchCNNController
 from architect import Architect
+
 # from tools.visualize import plot
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "5, 6"
@@ -104,19 +105,20 @@ def main():
         # plot(genotype.reduce, plot_path + "-reduce", caption)
 
         # output alpha per epochs to tensorboard data
-        for i, tensor in enumerate(model.alpha_normal):
-            for j, lsn in enumerate(F.softmax(tensor, dim=-1)):
-                tb_writer.add_scalars('epoch_alpha_normal/%d ~~ %d' % ((j - 2), i),
-                                      {'max_pl3': lsn[0], 'avg_pl3': lsn[1], 'skip_cn': lsn[2], 'sep_conv3': lsn[3],
-                                       'sep_conv5': lsn[4], 'dil_conv3': lsn[5], 'dil_conv5': lsn[6], 'none': lsn[7]},
-                                      epoch)
-        for i, tensor in enumerate(model.alpha_reduce):
-            for j, lsr in enumerate(F.softmax(tensor, dim=-1)):
-                tb_writer.add_scalars('epoch_alpha_reduce/%d ~~ %d' % ((j - 2), i),
-                                      {'max_pl3': lsr[0], 'avg_pl3': lsr[1], 'skip_cn': lsr[2], 'sep_conv3': lsr[3],
-                                       'sep_conv5': lsr[4], 'dil_conv3': lsr[5], 'dil_conv5': lsr[6], 'none': lsr[7]},
-                                      epoch)
-
+        # for i, tensor in enumerate(model.alpha_normal):
+        #     for j, lsn in enumerate(F.softmax(tensor, dim=-1)):
+        #         tb_writer.add_scalars('epoch_alpha_normal/%d ~~ %d' % ((j - 2), i),
+        #                               {'max_pl3': lsn[0], 'avg_pl3': lsn[1], 'skip_cn': lsn[2], 'sep_conv3': lsn[3],
+        #                                'sep_conv5': lsn[4], 'dil_conv3': lsn[5], 'dil_conv5': lsn[6], 'none': lsn[7]},
+        #                               epoch)
+        #     tb_writer.flush()
+        # for i, tensor in enumerate(model.alpha_reduce):
+        #     for j, lsr in enumerate(F.softmax(tensor, dim=-1)):
+        #         tb_writer.add_scalars('epoch_alpha_reduce/%d ~~ %d' % ((j - 2), i),
+        #                               {'max_pl3': lsr[0], 'avg_pl3': lsr[1], 'skip_cn': lsr[2], 'sep_conv3': lsr[3],
+        #                                'sep_conv5': lsr[4], 'dil_conv3': lsr[5], 'dil_conv5': lsr[6], 'none': lsr[7]},
+        #                               epoch)
+        #     tb_writer.flush()
         # save
         if best_top1 < top1:
             best_top1 = top1
@@ -129,6 +131,7 @@ def main():
 
     logger.info("Final best Prec@1 = {:.4%}".format(best_top1))
     logger.info("Best Genotype is = {}".format(best_genotype))
+    tb_writer.close()
 
 
 def train(train_loader, valid_loader, model, arch, w_optim, alpha_optim, lr, epoch):
@@ -245,4 +248,3 @@ def validate(valid_loader, model, epoch, cur_step):
 
 if __name__ == "__main__":
     main()
-
