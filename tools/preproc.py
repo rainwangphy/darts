@@ -5,8 +5,6 @@ import numpy as np
 import torchvision.transforms as transforms
 
 
-
-
 class Cutout(object):
     def __init__(self, length):
         self.length = length
@@ -28,8 +26,6 @@ class Cutout(object):
         img *= mask
 
         return img
-
-
 
 
 def data_transforms(dataset, cutout_length):
@@ -69,9 +65,3 @@ def data_transforms(dataset, cutout_length):
         train_transform.transforms.append(Cutout(cutout_length))
 
     return train_transform, valid_transform
-
-
-
-
-
-
