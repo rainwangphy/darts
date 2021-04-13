@@ -1,7 +1,7 @@
-# DARTS:Differentiable Architecture Search 🎯 - playground 🧗‍
+# DARTS:Differentiable Architecture Search
 
 ### This repo is made for ML2's playground projects
- **🌏 running environment info** <br>
+ ** running environment info** <br>
  `python >= 3.6, pytorch == 1.0, and needs CUDA`
  <br><br>
  **Requirements** <br>
@@ -16,8 +16,8 @@
 
 <br>
 
-### 🚀 How to search and train?
-#### 🎲 Search process
+### How to search and train?
+#### Search process
  - Simply, you can run DARTS for architecture search process with <br> &nbsp;&nbsp;&nbsp;&nbsp; `python run.py --name <your_pjt_name> --dataset <data_NAME> --data_path <your_PATH>` <br><br>
  ex) `python run.py --name DARTS_test1 --dataset cifar10 --data_path ../data`
 
@@ -33,7 +33,7 @@
 
 <br>
 
-#### 🎲 Train/Test process 
+#### Train/Test process 
 - After finished search or need proving some model architecture, then run <br> &nbsp;&nbsp;&nbsp;&nbsp; `python run_from.py --name <pjt_name> --dataset <data_NAME> --data_path <your_PATH> --genotype <Genotype>` <br><br>
 ex) `python run_from.py --name DARTS_test1 --dataset cifar10 --data_path ../data --genotype Genotype(normal=[[('sep_conv_3x3', 0), ('sep_conv_3x3', 1)], [('skip_connect', 0), ('sep_conv_3x3', 1)], [('skip_connect', 0), ('sep_conv_3x3', 1)], [('sep_conv_3x3', 0), ('sep_conv_3x3', 1)]], normal_concat=range(2, 6), reduce=[[('max_pool_3x3', 0), ('max_pool_3x3', 1)], [('max_pool_3x3', 1), ('skip_connect', 2)], [('skip_connect', 2), ('max_pool_3x3', 1)], [('dil_conv_5x5', 4), ('dil_conv_5x5', 2)]], reduce_concat=range(2, 6))`
 
@@ -49,7 +49,7 @@ This process makes you can check model(architecture)'s loss and accuracy.
 
 <br>
 
-#### 🕹 more
+#### more
 - You can visualize arch_graph with `python visualize.py <arch's Genotype>` 
 
 - Finded `Genotype` is recorded in last line of `search/<your_pjt_name>/<your_pjt_name>.log`
@@ -59,7 +59,7 @@ This process makes you can check model(architecture)'s loss and accuracy.
 
 <br>
 
-### 🏁 Results (The average value of the results)
+### Results (The average value of the results)
 
 |mode|runtime(avg)|train acc|val acc|environment|GPU(single)|params|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -69,7 +69,7 @@ This process makes you can check model(architecture)'s loss and accuracy.
 
 <br>
 
-### 🔗 Process description. 🥚🐣🐥
+### Process description.
 
 #### 1. Start setting
   1. Get some arguments in shell
