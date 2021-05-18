@@ -3,7 +3,7 @@ import copy
 import torch
 
 
-class Architect():
+class Architect:
 
     def __init__(self, net, w_momentum, w_weight_decay):
         self.net = net

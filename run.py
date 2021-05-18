@@ -12,7 +12,7 @@ from architect import Architect
 
 # from tools.visualize import plot
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "5, 6"
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 config = SearchConfig()
 
@@ -81,13 +81,14 @@ def main():
     # training loop-----------------------------------------------------------------------------
     best_top1 = 0.
     for epoch in range(config.epochs):
-        lr_scheduler.step()
-        lr = lr_scheduler.get_lr()[0]
+
+        lr = lr_scheduler.get_last_lr()[0]
 
         model.print_alphas(logger)
 
         # training
         train(train_loader, valid_loader, model, arch, w_optim, alpha_optim, lr, epoch)
+        lr_scheduler.step()
 
         # validation
         cur_step = (epoch + 1) * len(train_loader)
